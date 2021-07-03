@@ -1,10 +1,14 @@
 package com.training.RunningTracker.сontroller;
 
+import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+
+@RestController
 public class UserController {
     private UserService userService;
 
@@ -12,5 +16,11 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+
+    @PostMapping("/employees")
+    User login(@RequestBody User newUser) {
+        return userService.getUser(newUser);
+    }
+
 
 }

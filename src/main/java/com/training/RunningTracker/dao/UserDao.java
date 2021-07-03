@@ -17,6 +17,10 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
+    public User getUser(User user){
+        return new User();
+    }
+
     public User getAllUsers() {
         User user = new User();
         Connection connection = null;
