@@ -2,8 +2,8 @@ package com.training.RunningTracker.entity;
 
 public class User {
     private int id;
-    private char[] username;
-    private char[] password;
+    private String username;
+    private String password;
 
     public int getId() {
         return id;
@@ -13,19 +13,24 @@ public class User {
         this.id = id;
     }
 
-    public char[] getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(char[] username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username='" + username + " }";
     }
 }
