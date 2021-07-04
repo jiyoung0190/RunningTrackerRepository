@@ -17,12 +17,10 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
-    public User getUser(User user){
-        return new User();
-    }
 
-    public User getAllUsers() {
+    public User getUser(User newUser) {
         User user = new User();
+        user.setUsername("example");
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;

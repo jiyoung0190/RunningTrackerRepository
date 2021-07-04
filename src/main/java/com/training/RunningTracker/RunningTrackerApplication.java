@@ -11,13 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RunningTrackerApplication {
 	private static User user;
-	private UserDao userDao;
 
-	@Autowired
-	public RunningTrackerApplication(UserDao userDao) {
-		this.userDao = userDao;
-		User user = userDao.getAllUsers();
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(RunningTrackerApplication.class, args);

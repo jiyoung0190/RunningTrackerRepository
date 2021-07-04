@@ -17,10 +17,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/login")
     User login(@RequestBody User newUser) {
         return userService.getUser(newUser);
     }
+
 
 
 }
