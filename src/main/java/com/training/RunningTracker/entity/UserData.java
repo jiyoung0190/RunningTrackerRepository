@@ -35,4 +35,8 @@ public class UserData { // this is the data which needs to be saved to and retri
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return "UserData{" + "date=" + date + ", distance=" + distance + ", time=" + time + '}';
+    }
 }
