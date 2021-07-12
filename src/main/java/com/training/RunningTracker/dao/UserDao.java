@@ -19,8 +19,7 @@ public class UserDao {
 
 
     public User getUser(User newUser) {
-        User user = new User();
-        user.setUsername("example");
+        User user = new User(1, "Sonya", "123");
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;

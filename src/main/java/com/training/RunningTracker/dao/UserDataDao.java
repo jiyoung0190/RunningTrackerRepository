@@ -17,13 +17,12 @@ public class UserDataDao {
     private DataSource userDataSource;
 
     @Autowired
-    public UserDataDao(DataSource userDataS) {
+    public UserDataDao(DataSource userData) {
         this.userDataSource = userDataSource;
     }
 
     //new method
     public UserData getUserData(UserData userData) {
-        UserData user = new UserData();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -39,7 +38,7 @@ public class UserDataDao {
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setTime(resultSet.getTime("time"));
             }
-            return userData;
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
