@@ -19,7 +19,7 @@ public class UserDao {
 
 
     public User getUserByLoginAndPassword(User newUser) throws SQLException {
-        User user = new User();
+        User user = new User(newUser.getUsername(), newUser.getPassword());
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -31,7 +31,6 @@ public class UserDao {
             resultSet = statement.executeQuery(query);
 
             if (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
             }
