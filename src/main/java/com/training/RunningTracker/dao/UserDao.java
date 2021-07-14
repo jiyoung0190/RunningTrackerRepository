@@ -23,14 +23,14 @@ public class UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        String query = "select * from \"Users\" where username=" + user.getUsername() + " and password=" + user.getPassword();
+        String query = "select 'id','username' from \"Users\" where username=" + user.getUsername() + " and password=" + user.getPassword();
         try {
             connection = dataSource.getConnection();
             statement = connection.createStatement();
-
             resultSet = statement.executeQuery(query);
 
             if (resultSet.next()) {
+                user.setId(resultSet.getInt("users_id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
             }

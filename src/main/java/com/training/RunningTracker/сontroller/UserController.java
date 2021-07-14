@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{username}/{password}")
-    User getUserByLoginAndPassword(@PathVariable("username") String username, @PathVariable("password") String password) throws SQLException {
+    User getUser(@PathVariable("username") String username, @PathVariable("password") String password) throws SQLException {
         return userService.getUserByLoginAndPassword(new User(username, password));
     }
 
