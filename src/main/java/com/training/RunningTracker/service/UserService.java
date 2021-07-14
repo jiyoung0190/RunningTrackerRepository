@@ -6,6 +6,8 @@ import com.training.RunningTracker.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class UserService {
     private UserDao userDao;
@@ -15,7 +17,7 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User getUser(User newUser){
-        return userDao.getUser(newUser);
+    public User getUserByLoginAndPassword(User newUser) throws SQLException {
+        return userDao.getUserByLoginAndPassword(newUser);
     }
 }

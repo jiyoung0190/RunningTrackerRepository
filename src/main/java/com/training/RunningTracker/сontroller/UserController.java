@@ -5,6 +5,9 @@ import com.training.RunningTracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
+@RequestMapping("/RunningTracker")
 @RestController
 public class UserController {
     private UserService userService;
@@ -14,12 +17,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
-    User login(@RequestBody User newUser) {
-        return userService.getUser(newUser);
+    @GetMapping("/getUser/{username}/{password}")
+    User getUserByLoginAndPassword(@PathVariable("username") String username, @PathVariable("password") String password) throws SQLException {
+        return userService.getUserByLoginAndPassword(new User());
     }
-    @GetMapping("/getUser")
-    User getUser(){return userService.getUser(new User());}
 
 
 
