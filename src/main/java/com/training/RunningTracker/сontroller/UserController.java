@@ -17,8 +17,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getUser/{username}/{password}")
-    User getUser(@PathVariable("username") String username, @PathVariable("password") String password) throws SQLException {
+    @GetMapping("/login")
+    User login(@RequestParam("username") String username, @RequestParam("password") String password) throws SQLException {
         return userService.getUserByLoginAndPassword(new User(username, password));
     }
 

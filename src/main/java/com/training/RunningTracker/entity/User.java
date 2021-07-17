@@ -30,7 +30,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return "'" + username + "'";
     }
 
     public void setUsername(String username) {
@@ -38,7 +38,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return "'" + password + "'";
     }
 
     public void setPassword(String password) {

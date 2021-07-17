@@ -19,11 +19,11 @@ public class UserDao {
 
 
     public User getUserByLoginAndPassword(User newUser) throws SQLException {
-        User user = new User(newUser.getUsername(), newUser.getPassword());
+        User user = new User();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        String query = "select 'id','username' from \"Users\" where username=" + user.getUsername() + " and password=" + user.getPassword();
+        String query = "select users_id, username, password from \"Users\" where username=" + newUser.getUsername() + " and password=" + newUser.getPassword();
         try {
             connection = dataSource.getConnection();
             statement = connection.createStatement();
@@ -34,7 +34,7 @@ public class UserDao {
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
             }
-            return user;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
