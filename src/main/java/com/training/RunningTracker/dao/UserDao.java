@@ -21,13 +21,11 @@ public class UserDao {
     public User getUserByLoginAndPassword(User newUser) throws SQLException {
         User user = new User();
         Connection connection = null;
-        Statement statement = null;
         ResultSet resultSet = null;
-        String query = "select users_id, username, password from \"Users\" where username=" + newUser.getUsername() + " and password=" + newUser.getPassword();
+        PreparedStatement statement = connection.prepareStatement("select users_id, username, password from \"Users\" where username=" + newUser.getUsername() + " and password=" + newUser.getPassword());
         try {
             connection = dataSource.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
+            resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 user.setId(resultSet.getInt("users_id"));
@@ -35,8 +33,8 @@ public class UserDao {
                 user.setPassword(resultSet.getString("password"));
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             if (resultSet != null) {
                 try {
@@ -61,4 +59,47 @@ public class UserDao {
 
         }
     }
+
+    /*public User deleteUser(User newUser) throws SQLException{
+        User user = new User();
+        Connection connection = null;
+        PreparedStatement statement = connection.prepareStatement("delete * from \"Users\" where username=" + newUser.getUsername());
+        ResultSet resultSet = null;
+
+        try{
+            connection = dataSource.getConnection();
+            resultSet = statement.executeQuery();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                    }
+                    if (connection != null) {
+                        try {
+                            connection.close();
+                        } catch (SQLException e) {
+                        }
+                    }
+                }
+
+            }
+            System.out.println("User removed");
+            return user;
+
+        }
+
+
+
+    }
+
+     */
 }

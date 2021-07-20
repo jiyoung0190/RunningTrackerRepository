@@ -20,4 +20,10 @@ public class UserService {
     public User getUserByLoginAndPassword(User newUser) throws SQLException {
         return userDao.getUserByLoginAndPassword(newUser);
     }
+
+    /*public User deleteUser(User newUser) throws SQLException{
+        return userDao.deleteUser(newUser);
+    }
+
+     */
 }
