@@ -22,10 +22,10 @@ public class UserController {
         return userService.getUserByLoginAndPassword(newUser);
     }
 
-   /* @DeleteMapping("/delete/{id}")
-    User delete(@RequestBody User newUser) throws  SQLException {
-        return userService.deleteUser(newUser);
-    }*/
+    @DeleteMapping("/delete") //use the username to delete his account in the JSON "body" section
+    User delete(@RequestBody User user) throws  SQLException {
+        return userService.deleteUser(user);
+    }
 
 
 

@@ -9,6 +9,24 @@ public class UserData { // this is the data which needs to be saved to and retri
     private Date date;
     private float distance;
     private Time time;
+    private int id;
+    private int usersId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(int usersId) {
+        this.usersId = usersId;
+    }
 
     public Date getDate() {
         return date;

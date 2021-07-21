@@ -17,7 +17,7 @@ public class UserDataDao {
     private DataSource userDataSource;
 
     @Autowired
-    public UserDataDao(DataSource userData) {
+    public UserDataDao(DataSource userDataSource) {
         this.userDataSource = userDataSource;
     }
 
@@ -37,11 +37,12 @@ public class UserDataDao {
                 userData.setDate(resultSet.getDate("date"));
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setTime(resultSet.getTime("time"));
+
             }
 
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return userData;
     }

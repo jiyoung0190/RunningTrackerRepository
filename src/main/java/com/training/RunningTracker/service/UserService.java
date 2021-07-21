@@ -21,9 +21,9 @@ public class UserService {
         return userDao.getUserByLoginAndPassword(newUser);
     }
 
-    /*public User deleteUser(User newUser) throws SQLException{
-        return userDao.deleteUser(newUser);
+    public User deleteUser(User user) throws SQLException{
+        return userDao.deleteUser(user);
     }
 
-     */
+
 }
