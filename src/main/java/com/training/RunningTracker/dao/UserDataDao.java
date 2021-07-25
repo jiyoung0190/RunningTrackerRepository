@@ -13,7 +13,7 @@ import java.sql.*;
 public class UserDataDao {
 
     public static final String GET_USERDATA = "select * from \"Users\" inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id where username=?;";
-    public static final String INSERT_USERDATA = "insert () \"Users\" inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id where username=?;";
+    public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?) inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id";
 
     private DataSource userDataSource;
 
@@ -42,6 +42,8 @@ public class UserDataDao {
                 userData.setDate(resultSet.getDate("date"));
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setTime(resultSet.getTime("time"));
+                userData.setId(resultSet.getInt("id"));
+                userData.setUsersId(resultSet.getInt("users_id"));
 
             }
 
@@ -62,13 +64,18 @@ public class UserDataDao {
 
             connection = userDataSource.getConnection();
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setString(1, user.getUsername());
+            statement.setFloat(1, userData.getDistance());
+            statement.setDate(2, (Date) userData.getDate());
+            statement.setTime(3, userData.getTime());
+            statement.setInt(4, userData.getId());
+            statement.setInt(4, userData.getUsersId());
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 userData.setDate(resultSet.getDate("date"));
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setTime(resultSet.getTime("time"));
+
 
             }
 
@@ -80,9 +87,4 @@ public class UserDataDao {
 
     }
 
-   /* public UserData addUserData(UserData userData){
-        Connection connection = null;
-    }
-
-    */
 }

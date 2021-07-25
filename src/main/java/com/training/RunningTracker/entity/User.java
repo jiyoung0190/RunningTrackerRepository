@@ -7,7 +7,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private List<UserData> dataList;
+    /*private List<UserData> dataList;
 
     public List<UserData> getDataList() {
         return dataList;
@@ -16,6 +16,8 @@ public class User {
     public void setDataList(List<UserData> dataList) {
         this.dataList = dataList;
     }
+
+     */
 
     public User(String username, String password) {
         this.username = username;
@@ -44,7 +46,7 @@ public class User {
     }
 
     public String getUsername() {
-        return "'" + username + "'";
+        return username;
     }
 
     public void setUsername(String username) {
@@ -52,7 +54,7 @@ public class User {
     }
 
     public String getPassword() {
-        return "'" + password + "'";
+        return  password;
     }
 
     public void setPassword(String password) {

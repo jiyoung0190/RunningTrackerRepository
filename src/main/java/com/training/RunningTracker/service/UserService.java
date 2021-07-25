@@ -3,6 +3,7 @@ package com.training.RunningTracker.service;
 
 import com.training.RunningTracker.dao.UserDao;
 import com.training.RunningTracker.entity.User;
+import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,8 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User getUserByLoginAndPassword(User newUser) throws SQLException {
-        return userDao.getUserByLoginAndPassword(newUser);
+    public User getUserByLoginAndPassword(User user) throws SQLException {
+        return userDao.getUserByLoginAndPassword(user);
     }
 
     public User deleteUser(User user) throws SQLException{
@@ -27,6 +28,9 @@ public class UserService {
     }
 
 
-    public HttpStatus addNewUser(User user) {
+    public User addNewUser(User user) {
+        return userDao.createUser(user);
     }
+
+
 }

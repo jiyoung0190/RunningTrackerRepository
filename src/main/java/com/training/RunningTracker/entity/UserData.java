@@ -56,4 +56,6 @@ public class UserData { // this is the data which needs to be saved to and retri
     public String toString() {
         return "UserData{" + "date=" + date + ", distance=" + distance + ", time=" + time + '}';
     }
+
+
 }
