@@ -1,10 +1,21 @@
 package com.training.RunningTracker.entity;
 
 
+import java.util.List;
+
 public class User {
     private int id;
     private String username;
     private String password;
+    private List<UserData> dataList;
+
+    public List<UserData> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<UserData> dataList) {
+        this.dataList = dataList;
+    }
 
     public User(String username, String password) {
         this.username = username;

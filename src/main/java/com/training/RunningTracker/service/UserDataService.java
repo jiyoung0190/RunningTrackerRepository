@@ -20,6 +20,10 @@ public class UserDataService {
         return userDataDao.getUserData(user);
     }
 
+    public UserData createUserData(UserData userData) {
+        return userDataDao.createUserData(userData);
+    }
+
     /*public UserData addUserData(UserData userData){
         return userDataDao.addUserData(UserData userData);
     }

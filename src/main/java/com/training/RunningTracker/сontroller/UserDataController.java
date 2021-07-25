@@ -18,15 +18,15 @@ public class UserDataController {
     }
 
 
-    @GetMapping("/get/data")
+    @GetMapping("/getData")
     UserData getUserData(@RequestBody User user){
         return userDataService.getUserData(user);
     }
     
-   /* @PostMapping("/add/data")
+    @PostMapping("/addData")
     UserData post(@RequestBody UserData userData){
-        return userDataService
+        return userDataService.createUserData(userData);
     }
 
-    */
+    //add update and delete
 }

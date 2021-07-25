@@ -4,6 +4,7 @@ package com.training.RunningTracker.service;
 import com.training.RunningTracker.dao.UserDao;
 import com.training.RunningTracker.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -26,4 +27,6 @@ public class UserService {
     }
 
 
+    public HttpStatus addNewUser(User user) {
+    }
 }
