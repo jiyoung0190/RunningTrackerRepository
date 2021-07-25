@@ -2,36 +2,37 @@ package com.training.RunningTracker.dao;
 
 import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
+import com.training.RunningTracker.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 @Component
 public class UserDataDao {
 
     private DataSource userDataSource;
 
+
     @Autowired
     public UserDataDao(DataSource userDataSource) {
         this.userDataSource = userDataSource;
     }
 
-    //new method
-    public UserData getUserData(UserData userData) {
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        String query = "select date, distance, time from \"Users_data\"";
-        try {
-            connection = userDataSource.getConnection();
-            statement = connection.createStatement();
 
-            resultSet = statement.executeQuery(query);
+    public UserData getUserData(User user) {
+        UserData userData = new UserData();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+
+        try {
+            //here, we'll need to implement inner communication within 2 classes - UserDao and UserDataDao
+            connection = userDataSource.getConnection();
+            statement = connection.prepareStatement("select * from \"Users\" inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id where username=" + user.getUsername() + ";");
+            resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 userData.setDate(resultSet.getDate("date"));
@@ -46,4 +47,10 @@ public class UserDataDao {
         }
         return userData;
     }
+
+   /* public UserData addUserData(UserData userData){
+        Connection connection = null;
+    }
+
+    */
 }
