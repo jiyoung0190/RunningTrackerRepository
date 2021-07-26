@@ -57,7 +57,6 @@ public class UserDao {
 
         }
 
-
     public HttpStatus deleteUser(String username) throws SQLException{
 
         ResultSet resultSet = null;
@@ -104,9 +103,6 @@ public class UserDao {
             return HttpStatus.GONE;
 
         }
-
-
-
 
     public HttpStatus createUser(User newUser) {
         ResultSet resultSet = null;

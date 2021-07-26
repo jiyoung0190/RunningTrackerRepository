@@ -13,7 +13,7 @@ import java.sql.*;
 @Component
 public class UserDataDao {
 
-    public static final String GET_USERDATA = "select * from \"Users_data\" inner join \"Users\"on \"Users\".users_id = \"Users_data\".users_id where username=?;";
+    public static final String GET_USERDATA = "select * from \"Users_data\" left join \"Users\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".username=?;";
     public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?) inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id";
     public static final String DELETE_USERDATA = "delete from \"Users_data\" where username=?;";
 
@@ -26,21 +26,20 @@ public class UserDataDao {
     }
 
 
-    public UserData getUserData(User user) {
+    public UserData getUserData(String username) {
         UserData userData = new UserData();
-        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
 
-        try {
+        try(Connection connection = userDataSource.getConnection()){
 
-            connection = userDataSource.getConnection();
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setString(1, user.getUsername());
+            statement.setString(1, username);
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+
                 userData.setDate(resultSet.getDate("date"));
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setTime(resultSet.getTime("time"));

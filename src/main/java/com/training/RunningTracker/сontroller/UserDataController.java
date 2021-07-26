@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RequestMapping("/RunningTracker")
 @RestController
 public class UserDataController {
@@ -19,9 +21,9 @@ public class UserDataController {
     }
 
 
-    @GetMapping("/getData")
-    UserData getUserData(@RequestBody User user){
-        return userDataService.getUserData(user);
+    @GetMapping("/getData/{username}")
+    UserData getUserData(@PathVariable String username){
+        return userDataService.getUserData(username);
     }
     
     @PostMapping("/addData")
