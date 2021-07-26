@@ -22,6 +22,7 @@ public class UserService {
         return userDao.getUserByLoginAndPassword(username, passwordBody); //passwordBody of User type is reserved for user's password input
     }
 
+    //delete method also works this way now
     public HttpStatus deleteUser(String username) throws SQLException{
         return userDao.deleteUser(username);
     }
