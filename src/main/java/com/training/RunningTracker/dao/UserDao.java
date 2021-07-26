@@ -26,63 +26,61 @@ public class UserDao {
 
 
     public User getUserByLoginAndPassword(String username, User passwordBody) throws SQLException { //passwordBody of User type is reserved for user's password input
+
         User user = new User();
-        Connection connection = null;
         ResultSet resultSet = null;
         PreparedStatement statement = null;
-        try {
-            connection = dataSource.getConnection();
+
+        try (Connection connection = dataSource.getConnection()) {
+
             statement = connection.prepareStatement(GET_USER);
             statement.setString(1, username);
             statement.setString(2, passwordBody.getPassword());
+
             resultSet = statement.executeQuery();
 
 
             if (resultSet.next()) {
+
                 user.setUsers_id(resultSet.getInt("users_id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                }
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException e) {
-                    }
-                    if (connection != null) {
-                        try {
-                            connection.close();
-                        } catch (SQLException e) {
-                        }
-                    }
-                }
 
-            }
+            e.printStackTrace();
+
+        }
             return user;
 
         }
-    }
+
 
     public HttpStatus deleteUser(String username) throws SQLException{
-        Connection connection = null;
+
         ResultSet resultSet = null;
         PreparedStatement statement = null;
 
-        try{
-            connection = dataSource.getConnection();
+        try(Connection connection = dataSource.getConnection()){
+            try{
+                statement = connection.prepareStatement(DELETE_USER);
+                statement.setString(1, username);
 
-            statement = connection.prepareStatement(DELETE_USER);
-            statement.setString(1, username);
+                statement.executeUpdate();
 
-            resultSet = statement.executeQuery();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try{
+                statement = connection.prepareStatement(GET_USER_BY_USERNAME);
+                statement.setString(1, username);
+                resultSet = statement.executeQuery();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
         }
         catch (SQLException e) {
@@ -98,11 +96,6 @@ public class UserDao {
                         statement.close();
                     } catch (SQLException e) {
                     }
-                    if (connection != null) {
-                        try {
-                            connection.close();
-                        } catch (SQLException e) {
-                        }
                     }
                 }
 
@@ -114,21 +107,41 @@ public class UserDao {
 
 
 
-    }
 
     public HttpStatus createUser(User newUser) {
-        Connection connection = null;
         ResultSet resultSet = null;
         PreparedStatement statement = null;
-        try {
-            connection = dataSource.getConnection();
-            statement = connection.prepareStatement(CREATE_USER);
+        try(Connection connection = dataSource.getConnection()) {
 
-            statement.setInt(1, newUser.getUsers_id());
-            statement.setString(2, newUser.getUsername());
-            statement.setString(3, newUser.getPassword());
+            try {
+                statement = connection.prepareStatement(CREATE_USER);
 
-            resultSet = statement.executeQuery();
+                statement.setInt(1, newUser.getUsers_id());
+                statement.setString(2, newUser.getUsername());
+                statement.setString(3, newUser.getPassword());
+
+               statement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            try{
+                statement = connection.prepareStatement(GET_USER_BY_USERNAME);
+                statement.setString(1, newUser.getUsername());
+                resultSet = statement.executeQuery();
+
+                if(resultSet.next()){
+
+                    newUser.setUsers_id(resultSet.getInt("users_id"));
+                    newUser.setUsername(resultSet.getString("username"));
+                    newUser.setPassword(resultSet.getString("password"));
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,18 +156,10 @@ public class UserDao {
                         statement.close();
                     } catch (SQLException e) {
                     }
-                    if (connection != null) {
-                        try {
-                            connection.close();
-                        } catch (SQLException e) {
-                        }
+
                     }
                 }
-
             }
-
-
-        }
 
         return HttpStatus.CREATED;
     }
