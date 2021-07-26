@@ -4,6 +4,7 @@ import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
 import com.training.RunningTracker.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/RunningTracker")
@@ -24,7 +25,7 @@ public class UserDataController {
     }
     
     @PostMapping("/addData")
-    UserData post(@RequestBody UserData userData){
+    HttpStatus post(@RequestBody UserData userData){
         return userDataService.createUserData(userData);
     }
 

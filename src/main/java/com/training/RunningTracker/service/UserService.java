@@ -31,5 +31,7 @@ public class UserService {
         return userDao.createUser(user);
     }
 
-
+    public User updateUser(String username, User user) throws SQLException{
+        return userDao.updateUser(username, user);
+    }
 }

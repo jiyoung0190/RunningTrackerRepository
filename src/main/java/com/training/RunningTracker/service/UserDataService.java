@@ -4,6 +4,7 @@ import com.training.RunningTracker.dao.UserDataDao;
 import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,13 +21,13 @@ public class UserDataService {
         return userDataDao.getUserData(user);
     }
 
-    public UserData createUserData(UserData userData) {
+    public HttpStatus createUserData(UserData userData) {
         return userDataDao.createUserData(userData);
     }
 
-    /*public UserData addUserData(UserData userData){
-        return userDataDao.addUserData(UserData userData);
+    public HttpStatus deleteUserData(UserData userData){
+        return userDataDao.deleteUserData(userData);
     }
 
-     */
+
 }

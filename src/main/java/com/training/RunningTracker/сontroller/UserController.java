@@ -33,8 +33,11 @@ public class UserController {
     @PostMapping("/register")
     HttpStatus register(@RequestBody User user) throws SQLException{
         return userService.addNewUser(user);
-
-
+    }
+    
+    @PutMapping("/update/{username}")
+    User update(@PathVariable String username, @RequestBody User user) throws SQLException{
+        return userService.updateUser(username, user);
     }
 
 }

@@ -16,7 +16,8 @@ public class UserDao {
     public static final String CREATE_USER = "insert into \"Users\" (users_id, username, password) values (?, ?, ?);";
     public static final String DELETE_USER = "delete from \"Users\" where username=?;";
     public static final String GET_USER = "select users_id, username, password from \"Users\" where username=? and password=?;";
-
+    public static final String GET_USER_BY_USERNAME = "select users_id, username, password from \"Users\" where username=?;";
+    public static final String UPDATE_USER = "update \"Users\" set username =? where username=?;";
 
     @Autowired
     public UserDao(DataSource dataSource) {
@@ -114,7 +115,7 @@ public class UserDao {
 
 
     }
-    
+
     public HttpStatus createUser(User newUser) {
         Connection connection = null;
         ResultSet resultSet = null;
@@ -156,5 +157,44 @@ public class UserDao {
         }
 
         return HttpStatus.CREATED;
+    }
+
+    public User updateUser(String oldUsername, User user){
+        User updatedUser = new User();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try(Connection connection = dataSource.getConnection()){
+            try {
+                statement = connection.prepareStatement(UPDATE_USER);
+                statement.setString(1,
+                        user.getUsername());
+                statement.setString(2,
+                        oldUsername);
+                statement.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try{
+                statement = connection.prepareStatement(GET_USER_BY_USERNAME);
+                statement.setString(1, user.getUsername());
+                resultSet = statement.executeQuery();
+
+                if(resultSet.next()){
+
+                    updatedUser.setUsers_id(resultSet.getInt("users_id"));
+                    updatedUser.setUsername(resultSet.getString("username"));
+                    updatedUser.setPassword(resultSet.getString("password"));
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return updatedUser;
     }
 }
