@@ -25,7 +25,7 @@ public class UserDao {
     }
 
 
-    public User getUserByLoginAndPassword(User newUser) throws SQLException {
+    public User getUserByLoginAndPassword(String username, User passwordBody) throws SQLException { //passwordBody of User type is reserved for user's password input
         User user = new User();
         Connection connection = null;
         ResultSet resultSet = null;
@@ -33,8 +33,8 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
             statement = connection.prepareStatement(GET_USER);
-            statement.setString(1, newUser.getUsername());
-            statement.setString(2, newUser.getPassword());
+            statement.setString(1, username);
+            statement.setString(2, passwordBody.getPassword());
             resultSet = statement.executeQuery();
 
 
@@ -71,7 +71,7 @@ public class UserDao {
         }
     }
 
-    public HttpStatus deleteUser(User user) throws SQLException{
+    public HttpStatus deleteUser(String username) throws SQLException{
         Connection connection = null;
         ResultSet resultSet = null;
         PreparedStatement statement = null;
@@ -80,7 +80,7 @@ public class UserDao {
             connection = dataSource.getConnection();
 
             statement = connection.prepareStatement(DELETE_USER);
-            statement.setString(1, user.getUsername());
+            statement.setString(1, username);
 
             resultSet = statement.executeQuery();
 

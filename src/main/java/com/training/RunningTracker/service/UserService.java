@@ -18,12 +18,12 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User getUserByLoginAndPassword(User user) throws SQLException {
-        return userDao.getUserByLoginAndPassword(user);
+    public User getUserByLoginAndPassword(String username, User passwordBody) throws SQLException {
+        return userDao.getUserByLoginAndPassword(username, passwordBody); //passwordBody of User type is reserved for user's password input
     }
 
-    public HttpStatus deleteUser(User user) throws SQLException{
-        return userDao.deleteUser(user);
+    public HttpStatus deleteUser(String username) throws SQLException{
+        return userDao.deleteUser(username);
     }
 
 
@@ -31,7 +31,7 @@ public class UserService {
         return userDao.createUser(user);
     }
 
-    public User updateUser(String username, User user) throws SQLException{
-        return userDao.updateUser(username, user);
+    public User updateUser(String oldUsername, User user) throws SQLException{
+        return userDao.updateUser(oldUsername, user);
     }
 }

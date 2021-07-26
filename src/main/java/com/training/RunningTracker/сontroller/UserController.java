@@ -20,19 +20,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
-    User login(@RequestBody User user) throws SQLException {
-        return userService.getUserByLoginAndPassword(user);
+    @PostMapping("/login/{username}")
+    User login(@PathVariable String username, @RequestBody User passwordBody) throws SQLException {
+        return userService.getUserByLoginAndPassword(username, passwordBody); //passwordBody of User type is reserved for user's password input
     }
 
-    @DeleteMapping("/delete") //use the username to delete his account in the JSON "body" section
-    HttpStatus delete(@RequestBody User user) throws  SQLException {
-        return userService.deleteUser(user);
+    @DeleteMapping("/delete/{username}") //use the username to delete his account in the JSON "body" section
+    HttpStatus delete(@PathVariable String username) throws  SQLException {
+        return userService.deleteUser(username);
     }
 
     @PostMapping("/register")
-    HttpStatus register(@RequestBody User user) throws SQLException{
-        return userService.addNewUser(user);
+    HttpStatus register(@RequestBody User newUser) throws SQLException{
+        return userService.addNewUser(newUser);
     }
     
     @PutMapping("/update/{username}")
