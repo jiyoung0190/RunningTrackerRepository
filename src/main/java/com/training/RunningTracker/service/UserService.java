@@ -22,7 +22,7 @@ public class UserService {
         return userDao.getUserByLoginAndPassword(user);
     }
 
-    public User deleteUser(User user) throws SQLException{
+    public HttpStatus deleteUser(User user) throws SQLException{
         return userDao.deleteUser(user);
     }
 

@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete") //use the username to delete his account in the JSON "body" section
-    User delete(@RequestBody User user) throws  SQLException {
+    HttpStatus delete(@RequestBody User user) throws  SQLException {
         return userService.deleteUser(user);
     }
 

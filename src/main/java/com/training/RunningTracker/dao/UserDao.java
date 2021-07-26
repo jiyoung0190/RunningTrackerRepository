@@ -70,24 +70,19 @@ public class UserDao {
         }
     }
 
-    public User deleteUser(User user) throws SQLException{
-        User newUser = new User();
+    public HttpStatus deleteUser(User user) throws SQLException{
         Connection connection = null;
         ResultSet resultSet = null;
         PreparedStatement statement = null;
 
         try{
             connection = dataSource.getConnection();
+
             statement = connection.prepareStatement(DELETE_USER);
             statement.setString(1, user.getUsername());
+
             resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                newUser.setUsers_id(resultSet.getInt("users_id"));
-                newUser.setUsername(resultSet.getString("username"));
-                newUser.setPassword(resultSet.getString("password"));
-
-            }
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -112,8 +107,7 @@ public class UserDao {
 
             }
 
-            return newUser;
-
+            return HttpStatus.GONE;
 
         }
 
