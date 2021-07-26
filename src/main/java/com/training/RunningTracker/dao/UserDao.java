@@ -13,7 +13,7 @@ public class UserDao {
 
     private DataSource dataSource;
     //added constants and setting statements to prevent SQL-injections
-    public static final String CREATE_USER = "insert into \"Users_data\" (users_id, username, password) values (?, ?, ?);";
+    public static final String CREATE_USER = "insert into \"Users\" (users_id, username, password) values (?, ?, ?);";
     public static final String DELETE_USER = "delete from \"Users\" where username=?;";
     public static final String GET_USER = "select users_id, username, password from \"Users\" where username=? and password=?;";
 
@@ -38,7 +38,7 @@ public class UserDao {
 
 
             if (resultSet.next()) {
-                user.setId(resultSet.getInt("users_id"));
+                user.setUsers_id(resultSet.getInt("users_id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
             }
@@ -79,10 +79,11 @@ public class UserDao {
         try{
             connection = dataSource.getConnection();
             statement = connection.prepareStatement(DELETE_USER);
+            statement.setString(1, user.getUsername());
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                newUser.setId(resultSet.getInt("users_id"));
+                newUser.setUsers_id(resultSet.getInt("users_id"));
                 newUser.setUsername(resultSet.getString("username"));
                 newUser.setPassword(resultSet.getString("password"));
 
@@ -120,22 +121,19 @@ public class UserDao {
 
     }
     
-    public User createUser(User newUser) {
-        User user = new User();
+    public HttpStatus createUser(User newUser) {
         Connection connection = null;
         ResultSet resultSet = null;
         PreparedStatement statement = null;
         try {
             connection = dataSource.getConnection();
-            statement = connection.prepareStatement(CREATE_USER); //here it is
+            statement = connection.prepareStatement(CREATE_USER);
+
+            statement.setInt(1, newUser.getUsers_id());
+            statement.setString(2, newUser.getUsername());
+            statement.setString(3, newUser.getPassword());
+
             resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                newUser.setId(resultSet.getInt("users_id"));
-                newUser.setUsername(resultSet.getString("username"));
-                newUser.setPassword(resultSet.getString("password"));
-
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,8 +158,9 @@ public class UserDao {
 
             }
 
-            return user;
 
         }
+
+        return HttpStatus.CREATED;
     }
 }

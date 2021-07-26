@@ -3,7 +3,6 @@ package com.training.RunningTracker.service;
 
 import com.training.RunningTracker.dao.UserDao;
 import com.training.RunningTracker.entity.User;
-import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,7 @@ public class UserService {
     }
 
 
-    public User addNewUser(User user) {
+    public HttpStatus addNewUser(User user) throws SQLException{
         return userDao.createUser(user);
     }
 

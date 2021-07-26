@@ -1,10 +1,8 @@
 package com.training.RunningTracker.entity;
 
 
-import java.util.List;
-
 public class User {
-    private int id;
+    private int users_id;
     private String username;
     private String password;
     /*private List<UserData> dataList;
@@ -28,8 +26,8 @@ public class User {
     }
 
     //temporary
-    public User(int id, String username, String password) {
-        this.id = id;
+    public User(int users_id, String username, String password) {
+        this.users_id = users_id;
         this.username = username;
         this.password = password;
     }
@@ -37,12 +35,12 @@ public class User {
     public User() {
     }
 
-    public int getId() {
-        return id;
+    public int getUsers_id() {
+        return users_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUsers_id(int users_id) {
+        this.users_id = users_id;
     }
 
     public String getUsername() {
@@ -64,6 +62,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username='" + username + " }";
+        return "User{" + "id=" + users_id + ", username='" + username + " }";
     }
 }
