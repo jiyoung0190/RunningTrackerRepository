@@ -79,7 +79,7 @@ public class UserDataDao {
         return userData;
     }
 
-    //works just okay:-)
+    //works just okay:-) one more CRUD method left
     public HttpStatus deleteUserData(Integer userId) {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
