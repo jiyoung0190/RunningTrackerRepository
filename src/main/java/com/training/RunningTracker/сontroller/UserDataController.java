@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.sql.SQLException;
 
 @RequestMapping("/RunningTracker")
 @RestController
@@ -21,9 +22,9 @@ public class UserDataController {
     }
 
 
-    @GetMapping("/getData/{username}")
-    UserData getUserData(@PathVariable String username){
-        return userDataService.getUserData(username);
+    @GetMapping("/getData/{users_id}")
+    UserData getUserData(@PathVariable Integer users_id) throws SQLException {
+        return userDataService.getUserData(users_id);
     }
     
     @PostMapping("/addData")

@@ -13,7 +13,7 @@ import java.sql.*;
 @Component
 public class UserDataDao {
 
-    public static final String GET_USERDATA = "select * from \"Users_data\" left join \"Users\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".username=?;";
+    public static final String GET_USERDATA = "select * from \"Users\" left join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".users_id=?;";
     public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?) inner join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id";
     public static final String DELETE_USERDATA = "delete from \"Users_data\" where username=?;";
 
@@ -25,8 +25,8 @@ public class UserDataDao {
         this.userDataSource = userDataSource;
     }
 
-
-    public UserData getUserData(String username) {
+    //works now
+    public UserData getUserData(Integer users_id) {
         UserData userData = new UserData();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -35,8 +35,9 @@ public class UserDataDao {
         try(Connection connection = userDataSource.getConnection()){
 
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setString(1, username);
+            statement.setInt(1, users_id);
             resultSet = statement.executeQuery();
+
 
             if (resultSet.next()) {
 

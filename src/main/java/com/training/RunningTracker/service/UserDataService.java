@@ -17,8 +17,8 @@ public class UserDataService {
     }
 
 
-    public UserData getUserData(String username){
-        return userDataDao.getUserData(username);
+    public UserData getUserData(Integer user_id){
+        return userDataDao.getUserData(user_id);
     }
 
     public HttpStatus createUserData(UserData userData) {
