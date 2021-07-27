@@ -2,11 +2,10 @@ package com.training.RunningTracker.entity;
 
 
 import java.sql.Time;
-import java.util.Date;
 
 
 public class UserData { // this is the data which needs to be saved to and retrieved from the db
-    private Date date;
+    private java.sql.Date date;
     private float distance;
     private Time time;
     private int id;
@@ -28,11 +27,11 @@ public class UserData { // this is the data which needs to be saved to and retri
         this.usersId = usersId;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 

@@ -1,7 +1,6 @@
 package com.training.RunningTracker.service;
 
 import com.training.RunningTracker.dao.UserDataDao;
-import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +16,12 @@ public class UserDataService {
     }
 
 
-    public UserData getUserData(Integer user_id){
-        return userDataDao.getUserData(user_id);
+    public UserData getUserData(Integer users_id){
+        return userDataDao.getUserData(users_id);
     }
 
-    public HttpStatus createUserData(UserData userData) {
-        return userDataDao.createUserData(userData);
+    public HttpStatus createUserData(Integer userId, UserData userData) {
+        return userDataDao.createUserData(userId, userData);
     }
 
     public HttpStatus deleteUserData(UserData userData){
