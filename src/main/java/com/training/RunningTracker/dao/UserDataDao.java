@@ -13,7 +13,7 @@ public class UserDataDao {
 
     public static final String GET_USERDATA = "select * from \"Users\" left join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".users_id=?;";
     public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?);";
-    public static final String DELETE_USERDATA = "delete from \"Users_data\" where username=?;";
+    public static final String DELETE_USERDATA = "delete from \"Users_data\" where users_id=?;";
 
     private DataSource userDataSource;
 
@@ -23,7 +23,6 @@ public class UserDataDao {
         this.userDataSource = userDataSource;
     }
 
-    //fixed
     public HttpStatus createUserData(Integer userId, UserData userData) {
         PreparedStatement statement = null;
 
@@ -80,22 +79,17 @@ public class UserDataDao {
         return userData;
     }
 
-    public HttpStatus deleteUserData(UserData userData) {
-        Connection connection = null;
+    //works just okay:-)
+    public HttpStatus deleteUserData(Integer userId) {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
-            connection = userDataSource.getConnection();
+        try(Connection connection = userDataSource.getConnection()){
+
             statement = connection.prepareStatement(DELETE_USERDATA);
+            statement.setInt(1, userId);
 
-            statement.setFloat(1, userData.getDistance());
-            statement.setDate(2, userData.getDate());
-            statement.setTime(3, userData.getTime());
-            statement.setInt(4, userData.getId());
-            statement.setInt(4, userData.getUsersId());
-
-            resultSet = statement.executeQuery();
+            statement.executeUpdate();
 
 
         } catch (SQLException throwables) {

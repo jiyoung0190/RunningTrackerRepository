@@ -26,9 +26,13 @@ public class UserDataController {
     }
     
     @PostMapping("/addData/{users_id}")
-    HttpStatus post(@PathVariable Integer users_id, @RequestBody UserData userData){
+    HttpStatus post(@PathVariable Integer users_id, @RequestBody UserData userData) throws SQLException{
         return userDataService.createUserData(users_id, userData);
     }
 
+    @DeleteMapping("/deleteData/{users_id}")
+    HttpStatus delete(@PathVariable Integer users_id) throws SQLException{
+        return userDataService.deleteUserData(users_id);
+    }
     //add update and delete
 }

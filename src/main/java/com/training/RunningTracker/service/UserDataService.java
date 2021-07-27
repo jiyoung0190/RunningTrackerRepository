@@ -24,8 +24,8 @@ public class UserDataService {
         return userDataDao.createUserData(userId, userData);
     }
 
-    public HttpStatus deleteUserData(UserData userData){
-        return userDataDao.deleteUserData(userData);
+    public HttpStatus deleteUserData(Integer userId){
+        return userDataDao.deleteUserData(userId);
     }
 
 
