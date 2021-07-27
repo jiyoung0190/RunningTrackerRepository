@@ -14,6 +14,7 @@ public class UserDataDao {
     public static final String GET_USERDATA = "select * from \"Users\" left join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".users_id=?;";
     public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?);";
     public static final String DELETE_USERDATA = "delete from \"Users_data\" where users_id=?;";
+    public static final String UPDATE_USER_RECORD = "update \"Users_data\" set distance=?, date=?, time=?, id=? where users_id=? and  id=?;";
 
     private DataSource userDataSource;
 
@@ -79,10 +80,9 @@ public class UserDataDao {
         return userData;
     }
 
-    //works just okay:-) one more CRUD method left
+
     public HttpStatus deleteUserData(Integer userId) {
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
 
         try(Connection connection = userDataSource.getConnection()){
 
@@ -96,5 +96,32 @@ public class UserDataDao {
             throwables.printStackTrace();
         }
         return HttpStatus.GONE;
+    }
+
+    //last method! after a lot of attempts to make it work, it finally works now!
+    public HttpStatus updateUserData(Integer userId, Integer recordId, UserData userData) {
+        PreparedStatement statement = null;
+
+        try(Connection connection = userDataSource.getConnection()){
+            try{
+                statement = connection.prepareStatement(UPDATE_USER_RECORD);
+
+                statement.setFloat(1, userData.getDistance());
+                statement.setDate(2, userData.getDate());
+                statement.setTime(3, userData.getTime());
+                statement.setInt(4, userData.getId());
+                statement.setInt(5, userId);
+                statement.setInt(6, recordId);
+                statement.executeUpdate();
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return HttpStatus.OK;
     }
 }

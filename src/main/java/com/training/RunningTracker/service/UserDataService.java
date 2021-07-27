@@ -29,4 +29,7 @@ public class UserDataService {
     }
 
 
+    public HttpStatus updateUserData(Integer userId, Integer recordId, UserData userData) {
+        return userDataDao.updateUserData(userId, recordId, userData);
+    }
 }

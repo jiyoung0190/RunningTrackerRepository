@@ -34,5 +34,10 @@ public class UserDataController {
     HttpStatus delete(@PathVariable Integer users_id) throws SQLException{
         return userDataService.deleteUserData(users_id);
     }
-    //add update and delete
+
+    @PutMapping("/updateData/{users_id}/{record_id}")
+    HttpStatus update(@PathVariable Integer users_id, @PathVariable Integer record_id, @RequestBody UserData userData){
+        return userDataService.updateUserData(users_id, record_id, userData);
+    }
+
 }
