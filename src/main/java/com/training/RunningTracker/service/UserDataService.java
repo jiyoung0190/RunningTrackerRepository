@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDataService {
-    private UserDataDao userDataDao;
+    private final UserDataDao userDataDao;
 
     @Autowired
     public UserDataService(UserDataDao userDataDao){

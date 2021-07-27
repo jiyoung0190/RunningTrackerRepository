@@ -16,7 +16,7 @@ public class UserDataDao {
     public static final String DELETE_USERDATA = "delete from \"Users_data\" where users_id=?;";
     public static final String UPDATE_USER_RECORD = "update \"Users_data\" set distance=?, date=?, time=?, id=? where users_id=? and  id=?;";
 
-    private DataSource userDataSource;
+    private final DataSource userDataSource;
 
 
     @Autowired
@@ -25,7 +25,7 @@ public class UserDataDao {
     }
 
     public HttpStatus createUserData(Integer userId, UserData userData) {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
 
         try(Connection connection = userDataSource.getConnection()){
             try{
@@ -39,8 +39,8 @@ public class UserDataDao {
 
             statement.executeUpdate();
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
         } catch (SQLException e) {
@@ -53,8 +53,8 @@ public class UserDataDao {
 
     public UserData getUserData(Integer userId) {
         UserData userData = new UserData();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        PreparedStatement statement;
+        ResultSet resultSet;
 
 
         try(Connection connection = userDataSource.getConnection()){
@@ -82,7 +82,7 @@ public class UserDataDao {
 
 
     public HttpStatus deleteUserData(Integer userId) {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
 
         try(Connection connection = userDataSource.getConnection()){
 
@@ -92,15 +92,15 @@ public class UserDataDao {
             statement.executeUpdate();
 
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return HttpStatus.GONE;
     }
 
     //last method! after a lot of attempts to make it work, it finally works now!
     public HttpStatus updateUserData(Integer userId, Integer recordId, UserData userData) {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
 
         try(Connection connection = userDataSource.getConnection()){
             try{
@@ -119,8 +119,8 @@ public class UserDataDao {
                 e.printStackTrace();
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return HttpStatus.OK;
     }

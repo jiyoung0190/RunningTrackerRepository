@@ -3,9 +3,7 @@ package com.training.RunningTracker.сontroller;
 import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
 @RequestMapping("/RunningTracker")
 @RestController
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService){

@@ -28,8 +28,8 @@ public class UserDao {
     public User getUserByLoginAndPassword(String username, User passwordBody) throws SQLException { //passwordBody of User type is reserved for user's password input
 
         User user = new User();
-        ResultSet resultSet = null;
-        PreparedStatement statement = null;
+        ResultSet resultSet;
+        PreparedStatement statement;
 
         try (Connection connection = dataSource.getConnection()) {
 
@@ -69,16 +69,16 @@ public class UserDao {
 
                 statement.executeUpdate();
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             try{
                 statement = connection.prepareStatement(GET_USER_BY_USERNAME);
                 statement.setString(1, username);
                 resultSet = statement.executeQuery();
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
         }
@@ -118,8 +118,8 @@ public class UserDao {
 
                statement.executeUpdate();
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
             try{
@@ -162,8 +162,8 @@ public class UserDao {
 
     public User updateUser(String oldUsername, User user){
         User updatedUser = new User();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        PreparedStatement statement;
+        ResultSet resultSet;
 
         try(Connection connection = dataSource.getConnection()){
             try {
@@ -173,8 +173,8 @@ public class UserDao {
                 statement.setString(2,
                         oldUsername);
                 statement.executeUpdate();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             try{
                 statement = connection.prepareStatement(GET_USER_BY_USERNAME);

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @RequestMapping("/RunningTracker")
 @RestController
 public class UserDataController {
-    private UserDataService userDataService;
+    private final UserDataService userDataService;
 
 
     @Autowired
@@ -21,17 +21,17 @@ public class UserDataController {
 
 
     @GetMapping("/getData/{users_id}")
-    UserData getUserData(@PathVariable Integer users_id) throws SQLException {
+    UserData getUserData(@PathVariable Integer users_id) {
         return userDataService.getUserData(users_id);
     }
     
     @PostMapping("/addData/{users_id}")
-    HttpStatus post(@PathVariable Integer users_id, @RequestBody UserData userData) throws SQLException{
+    HttpStatus post(@PathVariable Integer users_id, @RequestBody UserData userData){
         return userDataService.createUserData(users_id, userData);
     }
 
     @DeleteMapping("/deleteData/{users_id}")
-    HttpStatus delete(@PathVariable Integer users_id) throws SQLException{
+    HttpStatus delete(@PathVariable Integer users_id){
         return userDataService.deleteUserData(users_id);
     }
 
