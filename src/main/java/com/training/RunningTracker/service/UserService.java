@@ -4,35 +4,33 @@ package com.training.RunningTracker.service;
 import com.training.RunningTracker.dao.UserDao;
 import com.training.RunningTracker.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 
 @Component
 public class UserService {
-    private UserDao userDao;
+    private final UserDao userDao;
 
     @Autowired
     private UserService(UserDao userDao){
         this.userDao = userDao;
     }
 
-    public User getUserByLoginAndPassword(String username, User passwordBody) throws SQLException {
-        return userDao.getUserByLoginAndPassword(username, passwordBody); //passwordBody of User type is reserved for user's password input
+    public boolean getUser(User user) {
+        User existentUser = userDao.getUser(user);
+        return existentUser.getUsername() != null || existentUser.getPassword() != null;
     }
 
-    //delete method also works this way now
-    public HttpStatus deleteUser(String username) throws SQLException{
-        return userDao.deleteUser(username);
+    public boolean deleteUser(User user){
+        return userDao.deleteUser(user);
     }
 
 
-    public HttpStatus addNewUser(User user) throws SQLException{
-        return userDao.createUser(user);
+    public boolean addNewUser(User user){
+        return userDao.createUser(user) != null;
     }
 
-    public User updateUser(String oldUsername, User user) throws SQLException{
-        return userDao.updateUser(oldUsername, user);
+    public boolean updateUser(User user){
+        return userDao.updateUser(user) != null;
     }
 }

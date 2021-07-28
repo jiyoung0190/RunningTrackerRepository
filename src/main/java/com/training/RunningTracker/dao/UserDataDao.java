@@ -27,17 +27,22 @@ public class UserDataDao {
     public HttpStatus createUserData(Integer userId, UserData userData) {
         PreparedStatement statement;
 
-        try(Connection connection = userDataSource.getConnection()){
-            try{
-            statement = connection.prepareStatement(INSERT_USERDATA);
+        try (Connection connection = userDataSource.getConnection()) {
+            try {
+                statement = connection.prepareStatement(INSERT_USERDATA);
 
-            statement.setFloat(1, userData.getDistance());
-            statement.setDate(2, userData.getDate());
-            statement.setTime(3, userData.getTime());
-            statement.setInt(4, userData.getId()); //needs a generator
-            statement.setInt(5, userId);
+                statement.setFloat(1,
+                        userData.getDistance());
+                statement.setDate(2,
+                        userData.getDate());
+                statement.setTime(3,
+                        userData.getTime());
+                statement.setInt(4,
+                        userData.getId()); //needs a generator
+                statement.setInt(5,
+                        userId);
 
-            statement.executeUpdate();
+                statement.executeUpdate();
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -57,12 +62,12 @@ public class UserDataDao {
         ResultSet resultSet;
 
 
-        try(Connection connection = userDataSource.getConnection()){
+        try (Connection connection = userDataSource.getConnection()) {
 
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setInt(1, userId);
+            statement.setInt(1,
+                    userId);
             resultSet = statement.executeQuery();
-
 
             if (resultSet.next()) {
                 userData.setDistance(resultSet.getFloat("distance"));
@@ -70,7 +75,6 @@ public class UserDataDao {
                 userData.setTime(resultSet.getTime("time"));
                 userData.setId(resultSet.getInt("id"));
                 userData.setUsersId(resultSet.getInt("users_id"));
-
             }
 
 
@@ -84,13 +88,11 @@ public class UserDataDao {
     public HttpStatus deleteUserData(Integer userId) {
         PreparedStatement statement;
 
-        try(Connection connection = userDataSource.getConnection()){
-
+        try (Connection connection = userDataSource.getConnection()) {
             statement = connection.prepareStatement(DELETE_USERDATA);
-            statement.setInt(1, userId);
-
+            statement.setInt(1,
+                    userId);
             statement.executeUpdate();
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,20 +100,25 @@ public class UserDataDao {
         return HttpStatus.GONE;
     }
 
-    //last method! after a lot of attempts to make it work, it finally works now!
     public HttpStatus updateUserData(Integer userId, Integer recordId, UserData userData) {
         PreparedStatement statement;
 
-        try(Connection connection = userDataSource.getConnection()){
-            try{
+        try (Connection connection = userDataSource.getConnection()) {
+            try {
                 statement = connection.prepareStatement(UPDATE_USER_RECORD);
 
-                statement.setFloat(1, userData.getDistance());
-                statement.setDate(2, userData.getDate());
-                statement.setTime(3, userData.getTime());
-                statement.setInt(4, userData.getId());
-                statement.setInt(5, userId);
-                statement.setInt(6, recordId);
+                statement.setFloat(1,
+                        userData.getDistance());
+                statement.setDate(2,
+                        userData.getDate());
+                statement.setTime(3,
+                        userData.getTime());
+                statement.setInt(4,
+                        userData.getId());
+                statement.setInt(5,
+                        userId);
+                statement.setInt(6,
+                        recordId);
                 statement.executeUpdate();
 
 

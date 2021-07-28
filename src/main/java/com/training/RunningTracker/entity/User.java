@@ -17,19 +17,6 @@ public class User {
 
      */
 
-    public User (int users_id){
-        this.users_id = users_id;
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-    public User(String username){
-        this.username = username;
-    }
-
-    //temporary
     public User(int users_id, String username, String password) {
         this.users_id = users_id;
         this.username = username;
