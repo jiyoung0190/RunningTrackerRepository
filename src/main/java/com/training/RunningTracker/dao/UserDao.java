@@ -46,6 +46,7 @@ public class UserDao {
             e.printStackTrace();
         }
         return returnedUser;
+
     }
 
     public boolean deleteUser(User user) {

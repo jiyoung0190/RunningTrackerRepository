@@ -12,7 +12,7 @@ public class UserService {
     private final UserDao userDao;
 
     @Autowired
-    private UserService(UserDao userDao){
+    private UserService(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -21,16 +21,16 @@ public class UserService {
         return existentUser.getUsername() != null || existentUser.getPassword() != null;
     }
 
-    public boolean deleteUser(User user){
+    public boolean deleteUser(User user) {
         return userDao.deleteUser(user);
     }
 
 
-    public boolean addNewUser(User user){
+    public boolean addNewUser(User user) {
         return userDao.createUser(user) != null;
     }
 
-    public boolean updateUser(User user){
+    public boolean updateUser(User user) {
         return userDao.updateUser(user) != null;
     }
 }
