@@ -1,10 +1,13 @@
 package com.training.RunningTracker.service;
 
 import com.training.RunningTracker.dao.UserDataDao;
+import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserDataService {
@@ -16,8 +19,8 @@ public class UserDataService {
     }
 
 
-    public UserData getUserData(Integer users_id){
-        return userDataDao.getUserData(users_id);
+    public List<UserData> getUserData(User user){
+        return userDataDao.getUserData(user);
     }
 
     public HttpStatus createUserData(Integer userId, UserData userData) {

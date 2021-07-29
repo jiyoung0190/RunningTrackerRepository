@@ -1,15 +1,31 @@
 package com.training.RunningTracker.entity;
 
 
+import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class UserData { // this is the data which needs to be saved to and retrieved from the db
+public class UserData {
     private java.sql.Date date;
     private float distance;
     private Time time;
     private int id;
     private int usersId;
+    private List<UserData> dataList;
+
+
+    public List<UserData> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<UserData> dataList) {
+        this.dataList = dataList;
+    }
+
+    public UserData() {
+    }
 
     public int getId() {
         return id;
@@ -49,11 +65,6 @@ public class UserData { // this is the data which needs to be saved to and retri
 
     public void setTime(Time time) {
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "UserData{" + "date=" + date + ", distance=" + distance + ", time=" + time + '}';
     }
 
 

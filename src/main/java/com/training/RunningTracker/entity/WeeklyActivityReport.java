@@ -8,7 +8,7 @@ public class WeeklyActivityReport {
     private Float avTime;
     private Float totalDistance;
 
-    public WeeklyActivityReport(Date week, Float avDistance, Float avTime, Float totalDistance) { //future json entity
+    public WeeklyActivityReport(Date week, Float avDistance, Float avTime, Float totalDistance) {
         this.week = week;
         this.avDistance = avDistance;
         this.avTime = avTime;

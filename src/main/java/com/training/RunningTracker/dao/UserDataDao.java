@@ -1,12 +1,16 @@
 package com.training.RunningTracker.dao;
 
+import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
+import org.apache.tomcat.util.buf.UDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserDataDao {
@@ -56,32 +60,34 @@ public class UserDataDao {
     }
 
 
-    public UserData getUserData(Integer userId) {
-        UserData userData = new UserData();
+    public List<UserData> getUserData(User user) {
         PreparedStatement statement;
         ResultSet resultSet;
+        List <UserData> dataList = new ArrayList<>();
+
 
 
         try (Connection connection = userDataSource.getConnection()) {
 
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setInt(1,
-                    userId);
+            statement.setInt(1, user.getUsers_id());
             resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
+            while(resultSet.next()) {
+                if(resultSet.getInt("users_id") == user.getUsers_id()){
+                UserData userData = new UserData();
                 userData.setDistance(resultSet.getFloat("distance"));
                 userData.setDate(resultSet.getDate("date"));
                 userData.setTime(resultSet.getTime("time"));
                 userData.setId(resultSet.getInt("id"));
                 userData.setUsersId(resultSet.getInt("users_id"));
+                dataList.add(userData);
+                }
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return userData;
+        return dataList;
     }
 
 

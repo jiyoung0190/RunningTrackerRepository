@@ -5,17 +5,6 @@ public class User {
     private int users_id;
     private String username;
     private String password;
-    /*private List<UserData> dataList;
-
-    public List<UserData> getDataList() {
-        return dataList;
-    }
-
-    public void setDataList(List<UserData> dataList) {
-        this.dataList = dataList;
-    }
-
-     */
 
     public User(int users_id, String username, String password) {
         this.users_id = users_id;
@@ -48,11 +37,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-
-    @Override
-    public String toString() {
-        return "User{" + "id=" + users_id + ", username='" + username + " }";
     }
 }
