@@ -3,7 +3,6 @@ package com.training.RunningTracker.entity;
 import java.sql.Time;
 
 
-
 public class UserData {
     private java.sql.Date date;
     private float distance;
@@ -23,11 +22,11 @@ public class UserData {
         this.id = id;
     }
 
-    public int getUserId() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUserId(int user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 

@@ -16,7 +16,7 @@ public class UserDataController {
 
 
     @Autowired
-    public UserDataController(UserDataService userDataService){
+    public UserDataController(UserDataService userDataService) {
         this.userDataService = userDataService;
     }
 
@@ -25,23 +25,29 @@ public class UserDataController {
     List<UserData> getUserData(@RequestBody UserData userData) {
         return userDataService.getUserData(userData);
     }
-    
+
     @PostMapping("/addData")
-    HttpStatus post(@RequestBody UserData userData){
-        if(!userDataService.createUserData(userData)){
+    HttpStatus post(@RequestBody UserData userData) {
+        if (!userDataService.createUserData(userData)) {
             return HttpStatus.NOT_FOUND;
         }
         return HttpStatus.CREATED;
     }
 
     @DeleteMapping("/deleteData")
-    HttpStatus delete(@RequestBody UserData userData){
-        return userDataService.deleteUserData(userData);
+    HttpStatus delete(@RequestBody UserData userData) {
+        if (!userDataService.deleteUserData(userData)) {
+            return HttpStatus.BAD_REQUEST;
+        }
+        return HttpStatus.GONE;
     }
 
     @PutMapping("/updateData")
-    HttpStatus update(@RequestBody UserData userData){
-        return userDataService.updateUserData(userData);
+    HttpStatus update(@RequestBody UserData userData) {
+        if (!userDataService.updateUserData(userData)) {
+            return HttpStatus.BAD_REQUEST;
+        }
+        return HttpStatus.OK;
     }
 
 }

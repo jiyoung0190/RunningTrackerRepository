@@ -4,6 +4,7 @@ import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,37 +32,33 @@ public class UserDataDao {
         UserData data = new UserData();
 
         try (Connection connection = userDataSource.getConnection()) {
-                statement = connection.prepareStatement(INSERT_USERDATA);
-                statement.setFloat(1,
-                        userData.getDistance());
-                statement.setDate(2,
-                        userData.getDate());
-                statement.setTime(3,
-                        userData.getTime());
-                statement.setInt(4,
-                        userData.getId());
-                statement.setInt(5,
-                        userData.getUserId());
+            statement = connection.prepareStatement(INSERT_USERDATA);
+            statement.setFloat(1,
+                    userData.getDistance());
+            statement.setDate(2,
+                    userData.getDate());
+            statement.setTime(3,
+                    userData.getTime());
+            statement.setInt(4,
+                    userData.getId());
+            statement.setInt(5,
+                    userData.getUser_id());
 
-               statement = connection.prepareStatement(GET_USERDATA);
-               resultSet = statement.executeQuery();
-               if(resultSet.next()){
-                   data.setDistance(resultSet.getFloat("distance"));
-                   data.setDate(resultSet.getDate("date"));
-                   data.setTime(resultSet.getTime("time"));
-                   data.setId(resultSet.getInt("id"));
-                   data.setUserId(resultSet.getInt("user_id"));
-
-               }
-
-
+            statement = connection.prepareStatement(GET_USERDATA);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                data.setDistance(resultSet.getFloat("distance"));
+                data.setDate(resultSet.getDate("date"));
+                data.setTime(resultSet.getTime("time"));
+                data.setId(resultSet.getInt("id"));
+                data.setUser_id(resultSet.getInt("user_id"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return data;
 
     }
-
 
     public List<UserData> getUserData(UserData userData) {
         PreparedStatement statement;
@@ -70,20 +67,19 @@ public class UserDataDao {
 
 
         try (Connection connection = userDataSource.getConnection()) {
-
             statement = connection.prepareStatement(GET_USERDATA);
             statement.setInt(1,
-                    userData.getUserId());
+                    userData.getUser_id());
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                if (resultSet.getInt("user_id") == userData.getUserId()) {
+                if (resultSet.getInt("user_id") == userData.getUser_id()) {
                     UserData data = new UserData();
                     data.setDistance(resultSet.getFloat("distance"));
                     data.setDate(resultSet.getDate("date"));
                     data.setTime(resultSet.getTime("time"));
                     data.setId(resultSet.getInt("id"));
-                    data.setUserId(resultSet.getInt("user_id"));
+                    data.setUser_id(resultSet.getInt("user_id"));
                     dataList.add(data);
                 }
             }
@@ -94,48 +90,71 @@ public class UserDataDao {
     }
 
 
-    public HttpStatus deleteUserData(UserData userData) {
+    public UserData deleteUserData(UserData userData) {
         PreparedStatement statement;
+        UserData deleted = new UserData();
+        ResultSet resultSet;
 
         try (Connection connection = userDataSource.getConnection()) {
             statement = connection.prepareStatement(DELETE_USERDATA);
             statement.setInt(1,
-                    userData.getUserId());
+                    userData.getUser_id());
             statement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return HttpStatus.GONE;
-    }
+            statement = connection.prepareStatement(GET_USERDATA);
+            statement.setInt(1,
+                    userData.getUser_id());
+            resultSet = statement.executeQuery();
 
-    public HttpStatus updateUserData(UserData userData) {
-        PreparedStatement statement;
-
-        try (Connection connection = userDataSource.getConnection()) {
-            try {
-                statement = connection.prepareStatement(UPDATE_USER_RECORD);
-
-                statement.setFloat(1,
-                        userData.getDistance());
-                statement.setDate(2,
-                        userData.getDate());
-                statement.setTime(3,
-                        userData.getTime());
-                statement.setInt(4,
-                        userData.getUserId());
-                statement.setInt(5,
-                        userData.getId());
-                statement.executeUpdate();
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (resultSet.next()) {
+                deleted.setDistance(resultSet.getFloat("distance"));
+                deleted.setDate(resultSet.getDate("date"));
+                deleted.setTime(resultSet.getTime("time"));
+                deleted.setId(resultSet.getInt("id"));
+                deleted.setUser_id(resultSet.getInt("user_id"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return HttpStatus.OK;
+        return deleted;
+    }
+
+    public UserData updateUserData(UserData userData) {
+        PreparedStatement statement;
+        UserData updated = new UserData();
+        ResultSet resultSet;
+
+        try (Connection connection = userDataSource.getConnection()) {
+            statement = connection.prepareStatement(UPDATE_USER_RECORD);
+            statement.setFloat(1,
+                    userData.getDistance());
+            statement.setDate(2,
+                    userData.getDate());
+            statement.setTime(3,
+                    userData.getTime());
+            statement.setInt(4,
+                    userData.getUser_id());
+            statement.setInt(5,
+                    userData.getId());
+            statement.executeUpdate();
+
+            statement = connection.prepareStatement(GET_USERDATA);
+            statement.setInt(1,
+                    userData.getUser_id());
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                updated.setDistance(resultSet.getFloat("distance"));
+                updated.setDate(resultSet.getDate("date"));
+                updated.setTime(resultSet.getTime("time"));
+                updated.setUser_id(resultSet.getInt("user_id"));
+                updated.setId(resultSet.getInt("id"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return updated;
     }
 }
