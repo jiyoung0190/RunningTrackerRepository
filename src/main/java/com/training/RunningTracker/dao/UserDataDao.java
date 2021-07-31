@@ -2,7 +2,6 @@ package com.training.RunningTracker.dao;
 
 import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
