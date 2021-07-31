@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDataDao {
 
     public static final String GET_USERDATA = "select * from \"User_data\" where user_id=?;";
-    public static final String INSERT_USERDATA = "insert into \"User_data\" (distance, date, time, id, user_id) values (?, ?, ?, ?, ?);";
+    public static final String CREATE_USERDATA = "insert into \"User_data\" (distance, date, time, id, user_id) values (?, ?, ?, ?, ?);";
     public static final String DELETE_USERDATA = "delete from \"User_data\" where user_id=?;";
     public static final String UPDATE_USER_RECORD = "update \"User_data\" set distance=?, date=?, time=? where user_id=? and id=?;";
 
@@ -32,7 +32,7 @@ public class UserDataDao {
         UserData data = new UserData();
 
         try (Connection connection = userDataSource.getConnection()) {
-            statement = connection.prepareStatement(INSERT_USERDATA);
+            statement = connection.prepareStatement(CREATE_USERDATA);
             statement.setFloat(1,
                     userData.getDistance());
             statement.setDate(2,

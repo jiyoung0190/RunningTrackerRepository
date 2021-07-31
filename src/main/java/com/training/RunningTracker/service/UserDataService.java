@@ -33,7 +33,7 @@ public class UserDataService {
 
 
     public boolean updateUserData(UserData userData) {
-        UserData updated = userDataDao.createUserData(userData);
+        UserData updated = userDataDao.updateUserData(userData);
         return updated != null;
     }
 }
