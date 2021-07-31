@@ -1,6 +1,5 @@
 package com.training.RunningTracker.сontroller;
 
-import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
 import com.training.RunningTracker.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +21,27 @@ public class UserDataController {
     }
 
 
-    @GetMapping("/getData")
-    List<UserData> getUserData(@RequestBody User user) {
-        return userDataService.getUserData(user);
+    @PostMapping("/userData")
+    List<UserData> getUserData(@RequestBody UserData userData) {
+        return userDataService.getUserData(userData);
     }
     
-    @PostMapping("/addData/{users_id}")
-    HttpStatus post(@PathVariable Integer users_id, @RequestBody UserData userData){
-        return userDataService.createUserData(users_id, userData);
+    @PostMapping("/addData")
+    HttpStatus post(@RequestBody UserData userData){
+        if(!userDataService.createUserData(userData)){
+            return HttpStatus.NOT_FOUND;
+        }
+        return HttpStatus.CREATED;
     }
 
-    @DeleteMapping("/deleteData/{users_id}")
-    HttpStatus delete(@PathVariable Integer users_id){
-        return userDataService.deleteUserData(users_id);
+    @DeleteMapping("/deleteData")
+    HttpStatus delete(@RequestBody UserData userData){
+        return userDataService.deleteUserData(userData);
     }
 
-    @PutMapping("/updateData/{users_id}/{record_id}")
-    HttpStatus update(@PathVariable Integer users_id, @PathVariable Integer record_id, @RequestBody UserData userData){
-        return userDataService.updateUserData(users_id, record_id, userData);
+    @PutMapping("/updateData")
+    HttpStatus update(@RequestBody UserData userData){
+        return userDataService.updateUserData(userData);
     }
 
 }

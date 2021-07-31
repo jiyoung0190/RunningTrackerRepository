@@ -1,12 +1,9 @@
 package com.training.RunningTracker.dao;
 
-import com.training.RunningTracker.entity.User;
 import com.training.RunningTracker.entity.UserData;
-import org.apache.tomcat.util.buf.UDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,10 +12,10 @@ import java.util.List;
 @Component
 public class UserDataDao {
 
-    public static final String GET_USERDATA = "select * from \"Users\" left join \"Users_data\"on \"Users\".users_id = \"Users_data\".users_id and \"Users\".users_id=?;";
-    public static final String INSERT_USERDATA = "insert into \"Users_data\" (distance, date, time, id, users_id) values (?, ?, ?, ?, ?);";
-    public static final String DELETE_USERDATA = "delete from \"Users_data\" where users_id=?;";
-    public static final String UPDATE_USER_RECORD = "update \"Users_data\" set distance=?, date=?, time=?, id=? where users_id=? and  id=?;";
+    public static final String GET_USERDATA = "select * from \"User_data\" where user_id=?;";
+    public static final String INSERT_USERDATA = "insert into \"User_data\" (distance, date, time, id, user_id) values (?, ?, ?, ?, ?);";
+    public static final String DELETE_USERDATA = "delete from \"User_data\" where user_id=?;";
+    public static final String UPDATE_USER_RECORD = "update \"User_data\" set distance=?, date=?, time=? where user_id=? and id=?;";
 
     private final DataSource userDataSource;
 
@@ -28,13 +25,13 @@ public class UserDataDao {
         this.userDataSource = userDataSource;
     }
 
-    public HttpStatus createUserData(Integer userId, UserData userData) {
+    public UserData createUserData(UserData userData) {
         PreparedStatement statement;
+        ResultSet resultSet;
+        UserData data = new UserData();
 
         try (Connection connection = userDataSource.getConnection()) {
-            try {
                 statement = connection.prepareStatement(INSERT_USERDATA);
-
                 statement.setFloat(1,
                         userData.getDistance());
                 statement.setDate(2,
@@ -42,46 +39,52 @@ public class UserDataDao {
                 statement.setTime(3,
                         userData.getTime());
                 statement.setInt(4,
-                        userData.getId()); //needs a generator
+                        userData.getId());
                 statement.setInt(5,
-                        userId);
+                        userData.getUserId());
 
-                statement.executeUpdate();
+               statement = connection.prepareStatement(GET_USERDATA);
+               resultSet = statement.executeQuery();
+               if(resultSet.next()){
+                   data.setDistance(resultSet.getFloat("distance"));
+                   data.setDate(resultSet.getDate("date"));
+                   data.setTime(resultSet.getTime("time"));
+                   data.setId(resultSet.getInt("id"));
+                   data.setUserId(resultSet.getInt("user_id"));
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+               }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return HttpStatus.CREATED;
+        return data;
 
     }
 
 
-    public List<UserData> getUserData(User user) {
+    public List<UserData> getUserData(UserData userData) {
         PreparedStatement statement;
         ResultSet resultSet;
-        List <UserData> dataList = new ArrayList<>();
-
+        List<UserData> dataList = new ArrayList<>();
 
 
         try (Connection connection = userDataSource.getConnection()) {
 
             statement = connection.prepareStatement(GET_USERDATA);
-            statement.setInt(1, user.getUsers_id());
+            statement.setInt(1,
+                    userData.getUserId());
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()) {
-                if(resultSet.getInt("users_id") == user.getUsers_id()){
-                UserData userData = new UserData();
-                userData.setDistance(resultSet.getFloat("distance"));
-                userData.setDate(resultSet.getDate("date"));
-                userData.setTime(resultSet.getTime("time"));
-                userData.setId(resultSet.getInt("id"));
-                userData.setUsersId(resultSet.getInt("users_id"));
-                dataList.add(userData);
+            while (resultSet.next()) {
+                if (resultSet.getInt("user_id") == userData.getUserId()) {
+                    UserData data = new UserData();
+                    data.setDistance(resultSet.getFloat("distance"));
+                    data.setDate(resultSet.getDate("date"));
+                    data.setTime(resultSet.getTime("time"));
+                    data.setId(resultSet.getInt("id"));
+                    data.setUserId(resultSet.getInt("user_id"));
+                    dataList.add(data);
                 }
             }
         } catch (SQLException e) {
@@ -91,13 +94,13 @@ public class UserDataDao {
     }
 
 
-    public HttpStatus deleteUserData(Integer userId) {
+    public HttpStatus deleteUserData(UserData userData) {
         PreparedStatement statement;
 
         try (Connection connection = userDataSource.getConnection()) {
             statement = connection.prepareStatement(DELETE_USERDATA);
             statement.setInt(1,
-                    userId);
+                    userData.getUserId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -106,7 +109,7 @@ public class UserDataDao {
         return HttpStatus.GONE;
     }
 
-    public HttpStatus updateUserData(Integer userId, Integer recordId, UserData userData) {
+    public HttpStatus updateUserData(UserData userData) {
         PreparedStatement statement;
 
         try (Connection connection = userDataSource.getConnection()) {
@@ -120,11 +123,9 @@ public class UserDataDao {
                 statement.setTime(3,
                         userData.getTime());
                 statement.setInt(4,
-                        userData.getId());
+                        userData.getUserId());
                 statement.setInt(5,
-                        userId);
-                statement.setInt(6,
-                        recordId);
+                        userData.getId());
                 statement.executeUpdate();
 
 

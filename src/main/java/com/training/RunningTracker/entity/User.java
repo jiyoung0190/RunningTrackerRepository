@@ -2,25 +2,29 @@ package com.training.RunningTracker.entity;
 
 
 public class User {
-    private int users_id;
+    private int id;
     private String username;
     private String password;
 
-    public User(int users_id, String username, String password) {
-        this.users_id = users_id;
+    public User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public User(int id) {
+        this.id = id;
     }
 
     public User() {
     }
 
-    public int getUsers_id() {
-        return users_id;
+    public int getId() {
+        return id;
     }
 
-    public void setUsers_id(int users_id) {
-        this.users_id = users_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

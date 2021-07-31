@@ -1,10 +1,7 @@
 package com.training.RunningTracker.entity;
 
-
-import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class UserData {
@@ -12,17 +9,8 @@ public class UserData {
     private float distance;
     private Time time;
     private int id;
-    private int usersId;
-    private List<UserData> dataList;
+    private int user_id;
 
-
-    public List<UserData> getDataList() {
-        return dataList;
-    }
-
-    public void setDataList(List<UserData> dataList) {
-        this.dataList = dataList;
-    }
 
     public UserData() {
     }
@@ -35,12 +23,12 @@ public class UserData {
         this.id = id;
     }
 
-    public int getUsersId() {
-        return usersId;
+    public int getUserId() {
+        return user_id;
     }
 
-    public void setUsersId(int usersId) {
-        this.usersId = usersId;
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
     }
 
     public java.sql.Date getDate() {

@@ -15,7 +15,6 @@ public class RunningTrackerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RunningTrackerApplication.class, args);
-		System.out.println("User: " + user);
 	}
 
 }
