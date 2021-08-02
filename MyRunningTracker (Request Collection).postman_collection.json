@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "2766981b-9174-4d91-8cb3-11fc492311b1",
+		"name": "MyRunningTracker (Request Collection)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"JenoLee\",\r\n    \"password\":\"23042000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/login",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":13,\r\n    \"username\":\"ByunBaekhyun\",\r\n    \"password\":\"06051992\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/register",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ByunBaekhyun\",\r\n    \"password\":\"06051992\",\r\n    \"id\":11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/update",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/delete",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UsersData",
+			"item": [
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"userData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/addData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"distance\": 170.0,\r\n    \"date\": \"2021-07-25\",\r\n    \"time\": \"00:03:20\",\r\n    \"id\":\"16\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/addData",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"addData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/updateData",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2021-08-01\",\r\n    \"distance\": 190.0,\r\n    \"time\": \"00:02:56\",\r\n    \"id\": 10,\r\n    \"user_id\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/updateData",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"updateData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/deleteData",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/deleteData",
+							"protocol": "https",
+							"host": [
+								"my-running-tracker",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"RunningTracker",
+								"deleteData"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
