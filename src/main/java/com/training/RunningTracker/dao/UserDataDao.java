@@ -25,9 +25,9 @@ public class UserDataDao {
         this.userDataSource = userDataSource;
     }
 
-    public UserData createUserData(UserData userData) {
+    public boolean createUserData(UserData userData) {
         PreparedStatement statement;
-        ResultSet resultSet;
+        boolean result = true;
         UserData data = new UserData();
 
         try (Connection connection = userDataSource.getConnection()) {
@@ -42,20 +42,12 @@ public class UserDataDao {
                     userData.getId());
             statement.setInt(5,
                     userData.getUser_id());
+            result = statement.executeUpdate() > 0;
 
-            statement = connection.prepareStatement(GET_USERDATA);
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                data.setDistance(resultSet.getFloat("distance"));
-                data.setDate(resultSet.getDate("date"));
-                data.setTime(resultSet.getTime("time"));
-                data.setId(resultSet.getInt("id"));
-                data.setUser_id(resultSet.getInt("user_id"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return data;
+        return result;
 
     }
 

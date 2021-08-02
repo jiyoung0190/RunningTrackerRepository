@@ -16,9 +16,9 @@ public class DAOConfig {
     public DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url("jdbc:postgresql://ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d39d50ar6ebfmr?user=tnfygsgwsgziaq&password=1b40374c8f2029f19d2560572618e26826949700a344f0a9f7e8dabcb4ea8cc2");
-        dataSourceBuilder.username("tnfygsgwsgziaq");
-        dataSourceBuilder.password("1b40374c8f2029f19d2560572618e26826949700a344f0a9f7e8dabcb4ea8cc2");
+        dataSourceBuilder.url("jdbc:postgresql://ec2-54-74-60-70.eu-west-1.compute.amazonaws.com:5432/dbp3jul6u0mf3g?user=qpdyjfbkdqdowe&password=45cbcc9866b10934fa076690885f6aa1b31259678a681033f34cac37d27fddba");
+        dataSourceBuilder.username("qpdyjfbkdqdowe");
+        dataSourceBuilder.password("45cbcc9866b10934fa076690885f6aa1b31259678a681033f34cac37d27fddba");
         return dataSourceBuilder.build();
     }
 }

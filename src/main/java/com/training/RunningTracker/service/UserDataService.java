@@ -22,8 +22,7 @@ public class UserDataService {
     }
 
     public boolean createUserData(UserData userData) {
-        UserData createdData = userDataDao.createUserData(userData);
-        return createdData != null;
+       return userDataDao.createUserData(userData);
     }
 
     public boolean deleteUserData(UserData userData) {

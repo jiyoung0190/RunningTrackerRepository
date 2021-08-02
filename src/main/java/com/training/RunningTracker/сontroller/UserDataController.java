@@ -26,15 +26,12 @@ public class UserDataController {
         return userDataService.getUserData(user_id);
     }
 
-    @PostMapping("/addData")
+    @PostMapping("/userData")
     HttpStatus post(@RequestBody UserData userData) {
-        if (!userDataService.createUserData(userData)) {
-            return HttpStatus.NOT_FOUND;
-        }
-        return HttpStatus.CREATED;
+        return userDataService.createUserData(userData)? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
     }
 
-    @DeleteMapping("/deleteData")
+    @DeleteMapping("/userData")
     HttpStatus delete(@RequestBody UserData userData) {
         if (!userDataService.deleteUserData(userData)) {
             return HttpStatus.BAD_REQUEST;
@@ -42,7 +39,7 @@ public class UserDataController {
         return HttpStatus.GONE;
     }
 
-    @PutMapping("/updateData")
+    @PutMapping("/userData")
     HttpStatus update(@RequestBody UserData userData) {
         if (!userDataService.updateUserData(userData)) {
             return HttpStatus.BAD_REQUEST;
