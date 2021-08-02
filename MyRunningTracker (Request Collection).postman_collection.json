@@ -139,7 +139,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData/4",
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData/7",
 							"protocol": "https",
 							"host": [
 								"my-running-tracker",
@@ -149,7 +149,7 @@
 							"path": [
 								"RunningTracker",
 								"userData",
-								"4"
+								"7"
 							]
 						}
 					},
@@ -162,7 +162,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"distance\": 170.0,\r\n    \"date\": \"2021-07-25\",\r\n    \"time\": \"00:03:20\",\r\n    \"id\":\"16\"\r\n}",
+							"raw": "{\r\n    \"distance\": 950.0,\r\n    \"date\": \"2021-08-25\",\r\n    \"time\": \"00:03:20\",\r\n    \"id\":17,\r\n    \"user_id\":7\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -170,7 +170,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/addData",
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
 							"protocol": "https",
 							"host": [
 								"my-running-tracker",
@@ -179,7 +179,7 @@
 							],
 							"path": [
 								"RunningTracker",
-								"addData"
+								"userData"
 							]
 						}
 					},
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2021-08-01\",\r\n    \"distance\": 190.0,\r\n    \"time\": \"00:02:56\",\r\n    \"id\": 10,\r\n    \"user_id\":4\r\n}",
+							"raw": "{\r\n    \"date\": \"2021-08-01\",\r\n    \"distance\": 700.0,\r\n    \"time\": \"00:02:56\",\r\n    \"id\": 10,\r\n    \"user_id\":7\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,7 +200,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/updateData",
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
 							"protocol": "https",
 							"host": [
 								"my-running-tracker",
@@ -209,7 +209,7 @@
 							],
 							"path": [
 								"RunningTracker",
-								"updateData"
+								"userData"
 							]
 						}
 					},
@@ -222,7 +222,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\":3\r\n}",
+							"raw": "{\r\n    \"user_id\":7\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +230,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/deleteData",
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
 							"protocol": "https",
 							"host": [
 								"my-running-tracker",
@@ -239,7 +239,7 @@
 							],
 							"path": [
 								"RunningTracker",
-								"deleteData"
+								"userData"
 							]
 						}
 					},
