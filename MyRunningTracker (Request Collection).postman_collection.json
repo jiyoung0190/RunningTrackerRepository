@@ -136,19 +136,10 @@
 				{
 					"name": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user_id\":4\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData",
+							"raw": "https://my-running-tracker.herokuapp.com/RunningTracker/userData/4",
 							"protocol": "https",
 							"host": [
 								"my-running-tracker",
@@ -157,7 +148,8 @@
 							],
 							"path": [
 								"RunningTracker",
-								"userData"
+								"userData",
+								"4"
 							]
 						}
 					},
