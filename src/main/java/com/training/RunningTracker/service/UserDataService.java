@@ -17,8 +17,8 @@ public class UserDataService {
     }
 
 
-    public List<UserData> getUserData(UserData userData) {
-        return userDataDao.getUserData(userData);
+    public List<UserData> getUserData(int user_id) {
+        return userDataDao.getUserData(user_id);
     }
 
     public boolean createUserData(UserData userData) {

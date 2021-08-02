@@ -59,7 +59,7 @@ public class UserDataDao {
 
     }
 
-    public List<UserData> getUserData(UserData userData) {
+    public List<UserData> getUserData(int user_id) {
         PreparedStatement statement;
         ResultSet resultSet;
         List<UserData> dataList = new ArrayList<>();
@@ -68,11 +68,11 @@ public class UserDataDao {
         try (Connection connection = userDataSource.getConnection()) {
             statement = connection.prepareStatement(GET_USERDATA);
             statement.setInt(1,
-                    userData.getUser_id());
+                    user_id);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                if (resultSet.getInt("user_id") == userData.getUser_id()) {
+                if (resultSet.getInt("user_id") == user_id) {
                     UserData data = new UserData();
                     data.setDistance(resultSet.getFloat("distance"));
                     data.setDate(resultSet.getDate("date"));

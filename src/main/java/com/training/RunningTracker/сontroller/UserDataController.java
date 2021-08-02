@@ -21,9 +21,9 @@ public class UserDataController {
     }
 
 
-    @PostMapping("/userData")
-    List<UserData> getUserData(@RequestBody UserData userData) {
-        return userDataService.getUserData(userData);
+    @GetMapping("/userData/{user_id}")
+    List<UserData> getUserData(@PathVariable int user_id) {
+        return userDataService.getUserData(user_id);
     }
 
     @PostMapping("/addData")
