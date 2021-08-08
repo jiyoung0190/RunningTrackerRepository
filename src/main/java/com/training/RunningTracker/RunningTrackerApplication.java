@@ -1,16 +1,15 @@
 package com.training.RunningTracker;
-//DAO stands for Database Access Object. It's a layer of objects that provide
-//database access. In Spring, it's called Repository.
 
-import com.training.RunningTracker.dao.UserDao;
-import com.training.RunningTracker.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 @SpringBootApplication
+@ComponentScan
+@EnableJpaRepositories
 public class RunningTrackerApplication {
-	private static User user;
 
 
 	public static void main(String[] args) {

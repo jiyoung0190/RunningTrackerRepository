@@ -1,13 +1,12 @@
 package com.training.RunningTracker.service;
 
-import com.training.RunningTracker.dao.UserDataDao;
 import com.training.RunningTracker.entity.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+/* @Component
 public class UserDataService {
     private final UserDataDao userDataDao;
 
@@ -36,3 +35,5 @@ public class UserDataService {
         return updated != null;
     }
 }
+
+ */

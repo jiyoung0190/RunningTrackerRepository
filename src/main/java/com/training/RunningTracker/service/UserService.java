@@ -1,36 +1,28 @@
 package com.training.RunningTracker.service;
 
 
-import com.training.RunningTracker.dao.UserDao;
 import com.training.RunningTracker.entity.User;
+import com.training.RunningTracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
-@Component
+@Service
 public class UserService {
-    private final UserDao userDao;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public boolean getUser(User user) {
-        User existentUser = userDao.getUser(user);
-        return existentUser.getUsername() != null || existentUser.getPassword() != null;
-    }
-
-    public boolean deleteUser(User user) {
-        return userDao.deleteUser(user);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
 
-    public boolean addNewUser(User user) {
-        return userDao.createUser(user) != null;
-    }
 
-    public boolean updateUser(User user) {
-        return userDao.updateUser(user) != null;
+    public void addNewUser(User user) {
+        userRepository.save(user);
     }
 }
+

@@ -1,29 +1,40 @@
 package com.training.RunningTracker.entity;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name="Users")
 public class User {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name="username")
     private String username;
+    @Column(name="password")
     private String password;
 
-    public User(int id, String username, String password) {
+    public User() {
+
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public User(int id) {
-        this.id = id;
-    }
-
-    public User() {
-    }
-
-    public int getId() {
+    public Integer Id() {
         return id;
     }
 
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,10 +47,15 @@ public class User {
     }
 
     public String getPassword() {
-        return  password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 }

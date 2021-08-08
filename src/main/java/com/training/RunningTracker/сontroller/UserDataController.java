@@ -1,6 +1,6 @@
 package com.training.RunningTracker.сontroller;
 
-import com.training.RunningTracker.entity.UserData;
+/*import com.training.RunningTracker.entity.UserData;
 import com.training.RunningTracker.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,3 +48,8 @@ public class UserDataController {
     }
 
 }
+
+
+
+
+ */
